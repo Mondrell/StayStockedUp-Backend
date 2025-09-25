@@ -1,13 +1,13 @@
 from sqlalchemy.orm import Session
-from app.models.ingredient import Ingredient
+from app.models.ingredient import Ingredient as IngredientModel
 from app.schemas.ingredient import IngredientCreate
 
-def create_ingredient(db: Session, ingredient: IngredientCreate):
-    db_ingredient = Ingredient(name=ingredient.name, quantity=ingredient.quantity)
-    db.add(db_ingredient)
+def create_ingredient(db: Session, item: IngredientCreate):
+    db_item = IngredientModel(name=item.name, quantity=item.quantity)
+    db.add(db_item)
     db.commit()
-    db.refresh(db_ingredient)
-    return db_ingredient
+    db.refresh(db_item)
+    return db_item
 
-def get_ingredients(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(Ingredient).offset(skip).limit(limit).all()
+def get_ingredients(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(IngredientModel).offset(skip).limit(limit).all()

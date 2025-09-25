@@ -1,3 +1,3 @@
-from .ingredient import Ingredient, IngredientCreate
+from .ingredient import Ingredient, IngredientCreate, IngredientBase
 
-__all__ = ["Ingredient", "IngredientCreate"]
+__all__ = ["Ingredient", "IngredientCreate", "IngredientBase"]
