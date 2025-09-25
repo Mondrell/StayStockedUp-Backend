@@ -1,18 +1,34 @@
+# app/schemas/ingredient.py
 from pydantic import BaseModel
+from typing import Optional
 
-# Shared props
+
 class IngredientBase(BaseModel):
     name: str
-    quantity: int
+    current_inventory: int
+    restock_threshold: int
+    inventory_status: str
+    category: Optional[str] = None
+    user: Optional[str] = None
+    restaurant_name: Optional[str] = None
 
-# Body for POST/creation
+
 class IngredientCreate(IngredientBase):
     pass
 
-# Response model (has id)
+
+class IngredientUpdate(BaseModel):
+    name: Optional[str] = None
+    current_inventory: Optional[int] = None
+    restock_threshold: Optional[int] = None
+    inventory_status: Optional[str] = None
+    category: Optional[str] = None
+    user: Optional[str] = None
+    restaurant_name: Optional[str] = None
+
+
 class Ingredient(IngredientBase):
     id: int
 
     class Config:
-        # replaces orm_mode=True in Pydantic v2
-        from_attributes = True
+        orm_mode = True
